@@ -61,7 +61,7 @@ app.post('/logout',(req,res) => {
 });
 
 app.post('/post',uploadMiddleware.single('file'), (req,res) =>{
-res.json(req.file);
+res.json(req.files.file);
 });
 app.listen(4000);
 
