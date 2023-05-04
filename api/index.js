@@ -9,7 +9,8 @@ const salt = bcrypt.genSaltSync(10);
 const secret = 'aaondswoie3243';
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
-
+const multer = require ('multer');
+const  uploadMiddleware = multer({dest: 'uploads/'});
 
 app.use(cors({credentials:true,origin:'http://localhost:3000' }));
 app.use(express.json());
@@ -57,7 +58,11 @@ res.json(info);
 
 app.post('/logout',(req,res) => {
     res.cookie('token', '').json('ok');
-})
+});
+
+app.post('/post',uploadMiddleware.single('file'), (req,res) =>{
+res.json(req.file);
+});
 app.listen(4000);
 
 
