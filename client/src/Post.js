@@ -1,5 +1,5 @@
 import React from 'react';
-import {formatISO9075} from "date-fns";
+import {format} from "date-fns";
 
 function Post({title,summary,cover,content,createdAt}) {
     return (
@@ -11,7 +11,7 @@ function Post({title,summary,cover,content,createdAt}) {
             <h2>{title}</h2>
             <p className="info">
                 <a href="" className="author">Darkim Powell</a>
-                <time>{formatISO9075(new Date (createdAt))}</time>
+                <time>{format(new Date (createdAt),'MMM d yyyy HH:mm')}</time>
             </p>
             <p>{summary}</p>
         </div>
