@@ -14,12 +14,13 @@ const fs = require("fs");
 const salt = bcrypt.genSaltSync(10);
 const secret = "asdfe45we45w345wegw345werjktjwertkj";
 
-app.use(
-  cors({
-    credentials: true,
-    origin: "https://blog-app-blogify-darkimpow.vercel.app",
-  })
-);
+const corsOptions = {
+  origin: "http://localhost:3000/",
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
@@ -139,5 +140,4 @@ app.get("/post/:id", async (req, res) => {
   res.json(postDoc);
 });
 
-app.listen(4000);
-//
+app.listen(3000);

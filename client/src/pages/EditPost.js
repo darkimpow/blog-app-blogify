@@ -11,15 +11,13 @@ export default function EditPost() {
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
-    fetch("https://blog-app-blogify-darkimpow.vercel.app/post/" + id).then(
-      (response) => {
-        response.json().then((postInfo) => {
-          setTitle(postInfo.title);
-          setContent(postInfo.content);
-          setSummary(postInfo.summary);
-        });
-      }
-    );
+    fetch("http://localhost:3000/post/" + id).then((response) => {
+      response.json().then((postInfo) => {
+        setTitle(postInfo.title);
+        setContent(postInfo.content);
+        setSummary(postInfo.summary);
+      });
+    });
   }, []);
 
   async function updatePost(ev) {
@@ -32,14 +30,11 @@ export default function EditPost() {
     if (files?.[0]) {
       data.set("file", files?.[0]);
     }
-    const response = await fetch(
-      "https://blog-app-blogify-darkimpow.vercel.app/post",
-      {
-        method: "PUT",
-        body: data,
-        credentials: "include",
-      }
-    );
+    const response = await fetch("http://localhost:3000/post", {
+      method: "PUT",
+      body: data,
+      credentials: "include",
+    });
     if (response.ok) {
       setRedirect(true);
     }
